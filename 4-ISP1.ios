@@ -1,7 +1,7 @@
-Current configuration : 4432 bytes
+Current configuration : 4492 bytes
 !
-! Last configuration change at 20:07:35 MST Mon Jul 8 2024 by lab
-! NVRAM config last updated at 20:08:17 MST Mon Jul 8 2024 by lab
+! Last configuration change at 20:46:48 MST Mon Jul 8 2024 by lab
+! NVRAM config last updated at 20:47:12 MST Mon Jul 8 2024 by lab
 !
 version 15.6
 service timestamps debug datetime msec localtime show-timezone year
@@ -94,7 +94,7 @@ interface GigabitEthernet0/0
 !
 interface GigabitEthernet0/1
  description fw1 eth1/1
- ip address 63.156.58.1 255.255.255.0
+ ip address 7.0.0.1 255.255.255.248
  ip nat inside
  ip virtual-reassembly in
  duplex full
@@ -102,7 +102,9 @@ interface GigabitEthernet0/1
  media-type rj45
 !
 interface GigabitEthernet0/2
- no ip address
+ ip address 7.0.0.9 255.255.255.248
+ ip nat inside
+ ip virtual-reassembly in
  shutdown
  duplex auto
  speed auto
@@ -135,7 +137,7 @@ snmp-server ifindex persist
 snmp-server location DC
 snmp-server chassis-id ISP1
 !
-access-list 1 permit 63.156.58.0 0.0.0.255
+access-list 1 permit 7.0.0.0 0.255.255.255
 !
 control-plane
 !
