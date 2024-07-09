@@ -1,0 +1,742 @@
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <deviceconfig>
+      <system>
+        <motd-and-banner>
+          <banner-header>FW1</banner-header>
+          <banner-header-color>color14</banner-header-color>
+          <banner-header-text-color>color4</banner-header-text-color>
+          <banner-header-footer-match>no</banner-header-footer-match>
+        </motd-and-banner>
+        <device-telemetry>
+          <device-health-performance>no</device-health-performance>
+          <product-usage>no</product-usage>
+          <threat-prevention>no</threat-prevention>
+          <region>Americas</region>
+        </device-telemetry>
+        <type>
+          <static/>
+        </type>
+        <update-server>updates.paloaltonetworks.com</update-server>
+        <update-schedule>
+          <threats>
+            <recurring>
+              <every-30-mins>
+                <at>10</at>
+                <action>download-and-install</action>
+              </every-30-mins>
+              <threshold>24</threshold>
+              <new-app-threshold>36</new-app-threshold>
+            </recurring>
+          </threats>
+          <anti-virus>
+            <recurring>
+              <hourly>
+                <at>30</at>
+                <action>download-and-install</action>
+              </hourly>
+            </recurring>
+          </anti-virus>
+          <global-protect-clientless-vpn>
+            <recurring>
+              <weekly>
+                <at>00:00</at>
+                <day-of-week>sunday</day-of-week>
+                <action>download-and-install</action>
+              </weekly>
+            </recurring>
+          </global-protect-clientless-vpn>
+          <wildfire>
+            <recurring>
+              <every-15-mins>
+                <at>0</at>
+                <action>download-and-install</action>
+              </every-15-mins>
+            </recurring>
+          </wildfire>
+        </update-schedule>
+        <timezone>America/Phoenix</timezone>
+        <service>
+          <disable-telnet>yes</disable-telnet>
+          <disable-http>yes</disable-http>
+        </service>
+        <hostname>FW2</hostname>
+        <ip-address>172.31.255.16</ip-address>
+        <netmask>255.255.255.0</netmask>
+        <default-gateway>172.31.255.254</default-gateway>
+        <dns-setting>
+          <servers>
+            <primary>208.67.222.22</primary>
+            <secondary>4.2.2.1</secondary>
+          </servers>
+        </dns-setting>
+        <ntp-servers>
+          <primary-ntp-server>
+            <ntp-server-address>172.31.255.1</ntp-server-address>
+          </primary-ntp-server>
+        </ntp-servers>
+        <domain>shamrockfoods.lab</domain>
+        <snmp-setting>
+          <access-setting>
+            <version>
+              <v2c>
+                <snmp-community-string>sfc.read</snmp-community-string>
+              </v2c>
+            </version>
+          </access-setting>
+          <snmp-system>
+            <location>lab</location>
+          </snmp-system>
+        </snmp-setting>
+      </system>
+      <setting>
+        <config>
+          <rematch>yes</rematch>
+        </config>
+        <management>
+          <hostname-type-in-syslog>FQDN</hostname-type-in-syslog>
+        </management>
+        <auto-mac-detect>yes</auto-mac-detect>
+      </setting>
+      <high-availability>
+        <interface>
+          <ha1/>
+          <ha1-backup/>
+          <ha2>
+            <port>ethernet1/8</port>
+            <ip-address>1.0.0.2</ip-address>
+            <netmask>255.255.255.252</netmask>
+          </ha2>
+        </interface>
+        <group>
+          <group-id>1</group-id>
+          <peer-ip>172.31.255.8</peer-ip>
+          <election-option>
+            <preemptive>yes</preemptive>
+            <timers>
+              <recommended/>
+            </timers>
+          </election-option>
+        </group>
+        <enabled>yes</enabled>
+      </high-availability>
+    </deviceconfig>
+  </result>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <network>
+      <interface>
+        <ethernet>
+          <entry name="ethernet1/8">
+            <ha/>
+          </entry>
+          <entry name="ethernet1/1">
+            <layer3>
+              <ndp-proxy>
+                <enabled>no</enabled>
+              </ndp-proxy>
+              <sdwan-link-settings>
+                <upstream-nat>
+                  <enable>no</enable>
+                  <static-ip/>
+                </upstream-nat>
+                <enable>no</enable>
+              </sdwan-link-settings>
+              <ip>
+                <entry name="63.156.58.20"/>
+              </ip>
+              <interface-management-profile>outside-mgmt</interface-management-profile>
+              <lldp>
+                <enable>no</enable>
+              </lldp>
+            </layer3>
+            <comment>PUB-SW1</comment>
+          </entry>
+          <entry name="ethernet1/2">
+            <layer3>
+              <ndp-proxy>
+                <enabled>no</enabled>
+              </ndp-proxy>
+              <sdwan-link-settings>
+                <upstream-nat>
+                  <enable>no</enable>
+                  <static-ip/>
+                </upstream-nat>
+                <enable>no</enable>
+              </sdwan-link-settings>
+              <ip>
+                <entry name="172.16.92.1/24"/>
+              </ip>
+              <lldp>
+                <enable>no</enable>
+              </lldp>
+              <interface-management-profile>inside-mgmt</interface-management-profile>
+            </layer3>
+            <comment>Core1</comment>
+          </entry>
+        </ethernet>
+      </interface>
+      <profiles>
+        <monitor-profile>
+          <entry name="default">
+            <interval>3</interval>
+            <threshold>5</threshold>
+            <action>wait-recover</action>
+          </entry>
+        </monitor-profile>
+        <interface-management-profile>
+          <entry name="outside-mgmt">
+            <https>yes</https>
+            <ssh>no</ssh>
+            <ping>yes</ping>
+          </entry>
+          <entry name="inside-mgmt">
+            <https>yes</https>
+            <ssh>yes</ssh>
+            <userid-service>yes</userid-service>
+            <ping>yes</ping>
+          </entry>
+        </interface-management-profile>
+      </profiles>
+      <ike>
+        <crypto-profiles>
+          <ike-crypto-profiles>
+            <entry name="default">
+              <encryption>
+                <member>aes-128-cbc</member>
+                <member>3des</member>
+              </encryption>
+              <hash>
+                <member>sha1</member>
+              </hash>
+              <dh-group>
+                <member>group2</member>
+              </dh-group>
+              <lifetime>
+                <hours>8</hours>
+              </lifetime>
+            </entry>
+            <entry name="Suite-B-GCM-128">
+              <encryption>
+                <member>aes-128-cbc</member>
+              </encryption>
+              <hash>
+                <member>sha256</member>
+              </hash>
+              <dh-group>
+                <member>group19</member>
+              </dh-group>
+              <lifetime>
+                <hours>8</hours>
+              </lifetime>
+            </entry>
+            <entry name="Suite-B-GCM-256">
+              <encryption>
+                <member>aes-256-cbc</member>
+              </encryption>
+              <hash>
+                <member>sha384</member>
+              </hash>
+              <dh-group>
+                <member>group20</member>
+              </dh-group>
+              <lifetime>
+                <hours>8</hours>
+              </lifetime>
+            </entry>
+          </ike-crypto-profiles>
+          <ipsec-crypto-profiles>
+            <entry name="default">
+              <esp>
+                <encryption>
+                  <member>aes-128-cbc</member>
+                  <member>3des</member>
+                </encryption>
+                <authentication>
+                  <member>sha1</member>
+                </authentication>
+              </esp>
+              <dh-group>group2</dh-group>
+              <lifetime>
+                <hours>1</hours>
+              </lifetime>
+            </entry>
+            <entry name="Suite-B-GCM-128">
+              <esp>
+                <encryption>
+                  <member>aes-128-gcm</member>
+                </encryption>
+                <authentication>
+                  <member>none</member>
+                </authentication>
+              </esp>
+              <dh-group>group19</dh-group>
+              <lifetime>
+                <hours>1</hours>
+              </lifetime>
+            </entry>
+            <entry name="Suite-B-GCM-256">
+              <esp>
+                <encryption>
+                  <member>aes-256-gcm</member>
+                </encryption>
+                <authentication>
+                  <member>none</member>
+                </authentication>
+              </esp>
+              <dh-group>group20</dh-group>
+              <lifetime>
+                <hours>1</hours>
+              </lifetime>
+            </entry>
+          </ipsec-crypto-profiles>
+          <global-protect-app-crypto-profiles>
+            <entry name="default">
+              <encryption>
+                <member>aes-128-cbc</member>
+              </encryption>
+              <authentication>
+                <member>sha1</member>
+              </authentication>
+            </entry>
+          </global-protect-app-crypto-profiles>
+        </crypto-profiles>
+        <gateway/>
+      </ike>
+      <qos>
+        <profile>
+          <entry name="default">
+            <class-bandwidth-type>
+              <mbps>
+                <class>
+                  <entry name="class1">
+                    <priority>real-time</priority>
+                  </entry>
+                  <entry name="class2">
+                    <priority>high</priority>
+                  </entry>
+                  <entry name="class3">
+                    <priority>high</priority>
+                  </entry>
+                  <entry name="class4">
+                    <priority>medium</priority>
+                  </entry>
+                  <entry name="class5">
+                    <priority>medium</priority>
+                  </entry>
+                  <entry name="class6">
+                    <priority>low</priority>
+                  </entry>
+                  <entry name="class7">
+                    <priority>low</priority>
+                  </entry>
+                  <entry name="class8">
+                    <priority>low</priority>
+                  </entry>
+                </class>
+              </mbps>
+            </class-bandwidth-type>
+          </entry>
+        </profile>
+      </qos>
+      <virtual-router>
+        <entry name="default">
+          <protocol>
+            <bgp>
+              <enable>no</enable>
+              <dampening-profile>
+                <entry name="default">
+                  <cutoff>1.25</cutoff>
+                  <reuse>0.5</reuse>
+                  <max-hold-time>900</max-hold-time>
+                  <decay-half-life-reachable>300</decay-half-life-reachable>
+                  <decay-half-life-unreachable>900</decay-half-life-unreachable>
+                  <enable>yes</enable>
+                </entry>
+              </dampening-profile>
+              <routing-options>
+                <graceful-restart>
+                  <enable>yes</enable>
+                </graceful-restart>
+              </routing-options>
+            </bgp>
+            <rip>
+              <enable>no</enable>
+            </rip>
+            <ospf>
+              <enable>yes</enable>
+              <area>
+                <entry name="0.0.0.0">
+                  <type>
+                    <normal/>
+                  </type>
+                  <interface>
+                    <entry name="ethernet1/2">
+                      <bfd>
+                        <profile>Inherit-vr-global-setting</profile>
+                      </bfd>
+                      <enable>yes</enable>
+                      <passive>no</passive>
+                      <gr-delay>10</gr-delay>
+                      <metric>10</metric>
+                      <priority>1</priority>
+                      <hello-interval>10</hello-interval>
+                      <dead-counts>4</dead-counts>
+                      <retransmit-interval>5</retransmit-interval>
+                      <transit-delay>1</transit-delay>
+                      <link-type>
+                        <broadcast/>
+                      </link-type>
+                    </entry>
+                  </interface>
+                </entry>
+              </area>
+              <router-id>172.31.255.4</router-id>
+            </ospf>
+            <ospfv3>
+              <enable>no</enable>
+            </ospfv3>
+          </protocol>
+          <interface>
+            <member>ethernet1/1</member>
+            <member>ethernet1/2</member>
+          </interface>
+          <ecmp>
+            <algorithm>
+              <ip-modulo/>
+            </algorithm>
+          </ecmp>
+          <routing-table>
+            <ip>
+              <static-route>
+                <entry name="primary default">
+                  <nexthop>
+                    <ip-address>63.156.58.1</ip-address>
+                  </nexthop>
+                  <bfd>
+                    <profile>None</profile>
+                  </bfd>
+                  <interface>ethernet1/1</interface>
+                  <metric>10</metric>
+                  <destination>0.0.0.0/0</destination>
+                  <route-table>
+                    <unicast/>
+                  </route-table>
+                </entry>
+              </static-route>
+            </ip>
+          </routing-table>
+        </entry>
+      </virtual-router>
+      <tunnel>
+        <ipsec/>
+        <global-protect-gateway/>
+        <global-protect-site-to-site/>
+      </tunnel>
+    </network>
+  </result>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <shared>
+      <application/>
+      <application-group/>
+      <service/>
+      <service-group/>
+      <botnet>
+        <configuration>
+          <http>
+            <dynamic-dns>
+              <enabled>yes</enabled>
+              <threshold>5</threshold>
+            </dynamic-dns>
+            <malware-sites>
+              <enabled>yes</enabled>
+              <threshold>5</threshold>
+            </malware-sites>
+            <recent-domains>
+              <enabled>yes</enabled>
+              <threshold>5</threshold>
+            </recent-domains>
+            <ip-domains>
+              <enabled>yes</enabled>
+              <threshold>10</threshold>
+            </ip-domains>
+            <executables-from-unknown-sites>
+              <enabled>yes</enabled>
+              <threshold>5</threshold>
+            </executables-from-unknown-sites>
+          </http>
+          <other-applications>
+            <irc>yes</irc>
+          </other-applications>
+          <unknown-applications>
+            <unknown-tcp>
+              <destinations-per-hour>10</destinations-per-hour>
+              <sessions-per-hour>10</sessions-per-hour>
+              <session-length>
+                <maximum-bytes>100</maximum-bytes>
+                <minimum-bytes>50</minimum-bytes>
+              </session-length>
+            </unknown-tcp>
+            <unknown-udp>
+              <destinations-per-hour>10</destinations-per-hour>
+              <sessions-per-hour>10</sessions-per-hour>
+              <session-length>
+                <maximum-bytes>100</maximum-bytes>
+                <minimum-bytes>50</minimum-bytes>
+              </session-length>
+            </unknown-udp>
+          </unknown-applications>
+        </configuration>
+        <report>
+          <topn>100</topn>
+          <scheduled>yes</scheduled>
+        </report>
+      </botnet>
+      <application-status/>
+    </shared>
+  </result>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <zone>
+      <entry name="Untrust">
+        <network>
+          <layer3>
+            <member>ethernet1/1</member>
+          </layer3>
+        </network>
+      </entry>
+      <entry name="Trust">
+        <network>
+          <layer3>
+            <member>ethernet1/2</member>
+          </layer3>
+        </network>
+        <enable-user-identification>yes</enable-user-identification>
+      </entry>
+    </zone>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <service-group/>
+  </result>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <service/>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <schedule/>
+  </result>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <rulebase>
+      <default-security-rules>
+        <rules>
+          <entry name="intrazone-default" uuid="99093672-da07-4c0f-af60-7ccde8c0e46a">
+            <action>allow</action>
+            <log-start>yes</log-start>
+            <log-end>no</log-end>
+          </entry>
+          <entry name="interzone-default" uuid="8e73f19c-bd2d-41d9-89b2-dfa515c6243c">
+            <action>allow</action>
+            <log-start>yes</log-start>
+            <log-end>no</log-end>
+          </entry>
+        </rules>
+      </default-security-rules>
+      <nat>
+        <rules>
+          <entry name="default NAT" uuid="dbcd397d-46ee-442f-a21e-8ad6698c407c">
+            <source-translation>
+              <dynamic-ip-and-port>
+                <interface-address>
+                  <ip>63.156.58.20</ip>
+                  <interface>ethernet1/1</interface>
+                </interface-address>
+              </dynamic-ip-and-port>
+            </source-translation>
+            <to>
+              <member>Untrust</member>
+            </to>
+            <from>
+              <member>Trust</member>
+            </from>
+            <source>
+              <member>any</member>
+            </source>
+            <destination>
+              <member>any</member>
+            </destination>
+            <service>any</service>
+            <to-interface>ethernet1/1</to-interface>
+          </entry>
+        </rules>
+      </nat>
+    </rulebase>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <import>
+      <network>
+        <interface>
+          <member>ethernet1/1</member>
+          <member>ethernet1/2</member>
+        </interface>
+      </network>
+    </import>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <application-group/>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <application/>
+  </result>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="7">
+  <result/>
+</response>
+<response status="success" code="19">
+  <result total-count="1" count="1">
+    <mgt-config>
+      <users>
+        <entry name="admin">
+          <phash>$5$mmhqoqfw$ormiW2AQwmudHD2W82.wrQPr/tEpmV31E27vhSoEri6</phash>
+          <permissions>
+            <role-based>
+              <superuser>yes</superuser>
+            </role-based>
+          </permissions>
+        </entry>
+      </users>
+      <password-complexity>
+        <enabled>yes</enabled>
+        <minimum-length>8</minimum-length>
+      </password-complexity>
+    </mgt-config>
+  </result>
+</response>
+[edit]
